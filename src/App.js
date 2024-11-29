@@ -46,7 +46,7 @@ function App() {
       <HeaderComponent />
       <Grid container spacing={2}>
         {cardList.map((item) => (
-          <CardComponent image={item.image} key={item.id} />
+          <CardComponent info={item} key={item.id} />
         ))}
       </Grid>
     </Container>
