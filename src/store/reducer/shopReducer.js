@@ -1,16 +1,34 @@
 import { ADD_ITEM } from "../actions/shopAction";
 
 const initialState = {
-  items: [],
+  item: [],
 };
 
 const shopReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-      };
+      const existingItemIndex = state.item.findIndex(
+        (cartItem) => cartItem.id === action.payload.id
+      );
+
+      if (existingItemIndex !== -1) {
+        const updatedCart = state.item.map((cartItem, index) =>
+          index === existingItemIndex
+            ? { ...cartItem, count: cartItem.count + 1 }
+            : cartItem
+        );
+
+        return {
+          ...state,
+          item: updatedCart,
+        };
+      } else {
+        return {
+          ...state,
+          item: [{ ...action.payload, count: 1 }, ...state.item],
+        };
+      }
+
     default:
       return state;
   }

@@ -2,9 +2,11 @@ import CardComponent from "./components/cards";
 import appleWatchImage from "./assets/images/appleWatch.jpg";
 import iphoneImage from "./assets/images/iphone.png";
 import airpodsImage from "./assets/images/airpods.jpg";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import HeaderComponent from "./components/header";
 import Grid from "@mui/material/Grid2";
+import DrawerComponent from "./components/drawer";
+import { useState } from "react";
 
 const cardList = [
   {
@@ -34,6 +36,12 @@ const cardList = [
 ];
 
 function App() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpenDrawer(newOpen);
+  };
+
   return (
     <Container
       sx={{
@@ -43,7 +51,8 @@ function App() {
         justifyContent: "space-between",
       }}
     >
-      <HeaderComponent />
+      <HeaderComponent toggleDrawer={toggleDrawer} />
+      <DrawerComponent toggleDrawer={toggleDrawer} openDrawer={openDrawer} />
       <Grid container spacing={2}>
         {cardList.map((item) => (
           <CardComponent info={item} key={item.id} />

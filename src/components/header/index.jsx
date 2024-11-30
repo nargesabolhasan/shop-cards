@@ -3,12 +3,11 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import BadgeCompoenet from "./badge";
 
-export default function HeaderComponent() {
+export default function HeaderComponent({ toggleDrawer }) {
   return (
     <Box sx={{ flexGrow: 1, width: 1 }}>
       <AppBar position="static">
@@ -25,7 +24,7 @@ export default function HeaderComponent() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <BadgeCompoenet />
+          <BadgeCompoenet toggleDrawer={toggleDrawer} />
         </Toolbar>
       </AppBar>
     </Box>

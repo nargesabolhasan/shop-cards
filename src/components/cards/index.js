@@ -14,8 +14,8 @@ import { addItem } from "../../store/actions/shopAction";
 const CardComponent = ({ info }) => {
   const dispatch = useDispatch();
 
-  const handleShop = (e, cardId) => {
-    dispatch(addItem(cardId));
+  const handleShop = (e, cardInfo) => {
+    dispatch(addItem(cardInfo));
   };
 
   return (
@@ -40,7 +40,7 @@ const CardComponent = ({ info }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={(e) => handleShop(e, info.id)}>
+          <Button size="small" onClick={(e) => handleShop(e, info)}>
             shop
           </Button>
         </CardActions>
