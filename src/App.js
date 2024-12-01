@@ -2,11 +2,13 @@ import CardComponent from "./components/cards";
 import appleWatchImage from "./assets/images/appleWatch.jpg";
 import iphoneImage from "./assets/images/iphone.png";
 import airpodsImage from "./assets/images/airpods.jpg";
-import { Container } from "@mui/material";
+import { Button, CardActions, Container } from "@mui/material";
 import HeaderComponent from "./components/header";
 import Grid from "@mui/material/Grid2";
 import DrawerComponent from "./components/drawer";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "./store/actions/shopAction";
 
 const cardList = [
   {
@@ -38,6 +40,12 @@ const cardList = [
 function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const handleShop = (e, cardInfo) => {
+    dispatch(addItem(cardInfo));
+  };
+
   const toggleDrawer = (newOpen) => () => {
     setOpenDrawer(newOpen);
   };
@@ -55,7 +63,13 @@ function App() {
       <DrawerComponent toggleDrawer={toggleDrawer} openDrawer={openDrawer} />
       <Grid container spacing={2}>
         {cardList.map((item) => (
-          <CardComponent info={item} key={item.id} />
+          <CardComponent info={item} key={item.id}>
+            <CardActions>
+              <Button size="small" onClick={(e) => handleShop(e, item)}>
+                shop
+              </Button>
+            </CardActions>
+          </CardComponent>
         ))}
       </Grid>
     </Container>

@@ -1,22 +1,13 @@
 import {
   Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
-  Typography,
+  Typography
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../store/actions/shopAction";
 
-const CardComponent = ({ info }) => {
-  const dispatch = useDispatch();
-
-  const handleShop = (e, cardInfo) => {
-    dispatch(addItem(cardInfo));
-  };
+const CardComponent = ({ info, children }) => {
 
   return (
     <Grid size={{ xs: 12, md: 4 }}>
@@ -39,11 +30,7 @@ const CardComponent = ({ info }) => {
             {info.caption}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={(e) => handleShop(e, info)}>
-            shop
-          </Button>
-        </CardActions>
+        {children}
       </Card>
     </Grid>
   );

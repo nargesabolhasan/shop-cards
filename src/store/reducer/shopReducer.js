@@ -7,21 +7,19 @@ const initialState = {
 const shopReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
-      const existingItemIndex = state.item.findIndex(
-        (cartItem) => cartItem.id === action.payload.id
+      const indexOfItem = state.item.findIndex(
+        (card) => card.id === action.payload.id
       );
 
-      if (existingItemIndex !== -1) {
-        const updatedCart = state.item.map((cartItem, index) =>
-          index === existingItemIndex
-            ? { ...cartItem, count: cartItem.count + 1 }
-            : cartItem
+      if (indexOfItem !== -1) {
+        const updateCount = state.item.map((card, index) =>
+          index === indexOfItem ? { ...card, count: card.count + 1 } : card
         );
-
         return {
           ...state,
-          item: updatedCart,
+          item: [...updateCount],
         };
+
       } else {
         return {
           ...state,
